@@ -1,0 +1,18 @@
+@font-face {
+  font-family: riFont;
+  src: url('./assets/fonts/font.otf');
+}
+
+body {
+  background-color: #000000;
+  color: white; 
+  margin: 0; 
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
