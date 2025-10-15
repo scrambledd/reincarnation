@@ -15,10 +15,16 @@ function Manager() {
 
     setIsReincarnating(true);
     
-    const newCards = Array.from({ length: 3 }, () => {
+    const newCards = [];
+    const usedIndices = new Set();
+    
+    while (newCards.length < 3) {
       const randIndex = Math.floor(Math.random() * cardData.length);
-      return cardData[randIndex];
-    });
+      if (!usedIndices.has(randIndex)) {
+        usedIndices.add(randIndex);
+        newCards.push(cardData[randIndex]);
+  }
+}
 
     setCards(newCards);
     setFlipped([false, false, false]);
