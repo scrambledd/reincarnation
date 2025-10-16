@@ -14,7 +14,12 @@ function Manager() {
     if (isReincarnating) return;
 
     setIsReincarnating(true);
-    
+
+    setFlipped([false, false, false]);
+    // since react batches setFlipped and setCards, add a delay to force re-render
+    // so that the cards flip back before changing them 
+    await new Promise((res) => setTimeout(res, 100));
+
     const newCards = [];
     const usedIndices = new Set();
     const excludedCardNames = new Set();
@@ -33,7 +38,6 @@ function Manager() {
 }
 
     setCards(newCards);
-    setFlipped([false, false, false]);
 
     for (let i = 0; i < 3; i++) {
       // stop execution for 1 second
