@@ -2,51 +2,62 @@ export const cards = [
   {
     frontImage: "/prosperity.png",
     backImage: "/card-back.png",
-    description: "desc"
-  },
-  {
-    frontImage: "/poverty.png",
-    backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "poverty",
+    description: ""
   },
   {
     frontImage: "/balanced.png",
     backImage: "/card-back.png",
-    description: "desc"
-  },
-  {
-    frontImage: "/unbalanced.png",
-    backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "unbalanced",
+    description: ""
   },
   {
     frontImage: "/good-health.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "disease",
+    description: ""
   },
+  {
+    frontImage: "/poverty.png",
+    backImage: "/card-back.png",
+    oppositeCard: "prosperity",
+    description: ""
+  },
+  {
+    frontImage: "/unbalanced.png",
+    backImage: "/card-back.png",
+    oppositeCard: "balanced",
+    description: ""
+  },
+
   {
     frontImage: "/disease.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "good-health",
+    description: ""
   },
   {
     frontImage: "/love.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "isolation",
+    description: ""
   },
   {
     frontImage: "/isolation.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "love",
+    description: ""
   },
   {
     frontImage: "/purpose.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "no-purpose",
+    description: ""
   },
   {
     frontImage: "/no-purpose.png",
     backImage: "/card-back.png",
-    description: "desc"
+    oppositeCard: "purpose",
+    description: ""
   }
-]
+];

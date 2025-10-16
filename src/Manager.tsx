@@ -17,13 +17,19 @@ function Manager() {
     
     const newCards = [];
     const usedIndices = new Set();
+    const excludedCardNames = new Set();
     
     while (newCards.length < 3) {
       const randIndex = Math.floor(Math.random() * cardData.length);
-      if (!usedIndices.has(randIndex)) {
+      const selectedCard = cardData[randIndex];
+      const cardName = selectedCard.frontImage.replace("/", "").replace(".png", ""); 
+      
+      if (!usedIndices.has(randIndex) && !excludedCardNames.has(cardName)) {
         usedIndices.add(randIndex);
-        newCards.push(cardData[randIndex]);
-  }
+        newCards.push(selectedCard);
+        excludedCardNames.add(selectedCard.oppositeCard);
+      }
+
 }
 
     setCards(newCards);
