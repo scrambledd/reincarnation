@@ -2,24 +2,21 @@
   width: 300px;
   height: 450px;
   perspective: 1000px;
-  transition: filter 0.3s ease;
+  border: 1px solid transparent;
+  
+  /*transition: filter 0.3s ease;*/
+  transition: border 0.3s ease;
 }
 
 /*
 .card.selected {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
-  
 }
   */
 
-  
-
 .card.selected {
-  border: 3px solid rgb(255, 255, 255);
-  border-width: 1px;
-  /*transform: scale(1.05);/*
- /* transition: border 0.2s ease, transform 0.2s ease;*/
-  
+  border: 1px solid #f0f6f0;
+   /*transform: scale(1.05);*/
 }
 
   

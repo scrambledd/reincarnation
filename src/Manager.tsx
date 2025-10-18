@@ -60,7 +60,8 @@ function Manager() {
       });
     }
 
-    setIsReincarnating(false);
+    setIsReincarnating(false); 
+  
   };
 
   return (
