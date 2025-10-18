@@ -10,12 +10,14 @@ function Manager() {
   const [flipped, setFlipped] = useState([false, false, false]);
   const [isReincarnating, setIsReincarnating] = useState(false);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+  const [hasReincarnated, setHasReincarnated] = useState(false);
   
   const reincarnate = async () => {
     if (isReincarnating) return;
 
+    setHasReincarnated(true);
     setIsReincarnating(true);
-
+    
     setFlipped([false, false, false]);
     // since react batches setFlipped and setCards, add a delay to force re-render
     // so that the cards flip back before changing them 
@@ -67,7 +69,7 @@ function Manager() {
       cards={cards}
       flipped={flipped}
       selectedCardIndex={selectedCardIndex}
-      onSelect={!isReincarnating ? setSelectedCardIndex : () => {}} />
+      onSelect={!isReincarnating && hasReincarnated ? setSelectedCardIndex : () => {}} />
       
       <ReincarnateButton 
       onClick={reincarnate} 
