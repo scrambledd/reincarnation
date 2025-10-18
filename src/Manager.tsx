@@ -9,7 +9,8 @@ function Manager() {
   const [cards, setCards] = useState(cardData.slice(0, 3));
   const [flipped, setFlipped] = useState([false, false, false]);
   const [isReincarnating, setIsReincarnating] = useState(false);
-
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+  
   const reincarnate = async () => {
     if (isReincarnating) return;
 
@@ -18,7 +19,7 @@ function Manager() {
     setFlipped([false, false, false]);
     // since react batches setFlipped and setCards, add a delay to force re-render
     // so that the cards flip back before changing them 
-    await new Promise((res) => setTimeout(res, 100));
+    await new Promise((res) => setTimeout(res, 500));
 
     const newCards = [];
     const usedIndices = new Set();
@@ -38,6 +39,7 @@ function Manager() {
 }
 
     setCards(newCards);
+    setSelectedCardIndex(null);
 
     for (let i = 0; i < 3; i++) {
       // stop execution for 1 second
@@ -61,8 +63,22 @@ function Manager() {
 
   return (
     <>
-      <DisplayedCards cards={cards} flipped={flipped} />
-      <ReincarnateButton onClick={reincarnate} disabled={isReincarnating} />
+      <DisplayedCards
+      cards={cards}
+      flipped={flipped}
+      selectedCardIndex={selectedCardIndex}
+      onSelect={!isReincarnating ? setSelectedCardIndex : () => {}} />
+      
+      <ReincarnateButton 
+      onClick={reincarnate} 
+      disabled={isReincarnating} />
+
+      {selectedCardIndex !== null && (
+        <div className="card-description">
+          <p>{cards[selectedCardIndex].description}</p>
+        </div>
+      )}
+
     </>
   );
 }

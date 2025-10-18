@@ -8,10 +8,13 @@ type CardData = {
 type DisplayedCardsProps = {
   cards: CardData[];
   flipped: boolean[];
+  selectedCardIndex: number | null;
+  onSelect: (index: number | null) => void;
 }
 
 
-export function DisplayedCards({cards, flipped}: DisplayedCardsProps) {
+export function DisplayedCards({cards, flipped, selectedCardIndex, onSelect}: DisplayedCardsProps) {
+  
   return (
     <div className="cards-container">
       {cards.map((card, i) => {
@@ -20,7 +23,9 @@ export function DisplayedCards({cards, flipped}: DisplayedCardsProps) {
           key={i}
           frontImage={card.frontImage}
           backImage={card.backImage}
-          flipped={flipped[i]} 
+          isFlipped={flipped[i]} 
+          isSelected={selectedCardIndex === i}
+          onClick={() => onSelect(i)}
           />
         );
       })}

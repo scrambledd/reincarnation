@@ -16,3 +16,10 @@ body {
   margin-top: 20px;
   margin-bottom: 50px;
 }
+
+.card-description {
+  text-align: center;
+  margin-top: 80px;
+  font-family: riFont, sans-serif;
+  font-size: 22px;
+}
