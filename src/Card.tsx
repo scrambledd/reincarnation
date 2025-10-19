@@ -6,15 +6,17 @@ type CardProps = {
   isFlipped: boolean;
   isSelected: boolean;
   onClick: () => void;
+  isReincarnating: boolean;
 }
 
-export function Card({ frontImage, backImage, isFlipped, isSelected, onClick }: CardProps) {
+export function Card({ frontImage, backImage, isFlipped, isSelected, onClick, isReincarnating }: CardProps) {
 
   return (
-    <div className={`card ${isFlipped ? "flipped" : ""} 
-    ${isSelected ? "selected" : ""}`}
+    <div className={`card ${isFlipped ? "flipped" : ""}
+    ${isSelected ? "selected" : ""} 
+    ${isReincarnating ? "reincarnating" : ""}`}
     onClick={onClick}
-      style={{ cursor: isFlipped ? 'pointer' : 'default' }}  
+      style={{ cursor: isFlipped ? 'pointer' : 'default' }}
     >
       <div className="card-inner">
         <div className="card-front">

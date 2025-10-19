@@ -20,6 +20,11 @@
    /*transform: scale(1.05);*/
 }
 
+.card.reincarnating {
+  border: 1px solid transparent !important;
+  transition: none !important;
+}
+
 .card-inner {
   position: relative;
   width: 100%;
