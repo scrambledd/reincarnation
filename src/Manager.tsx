@@ -71,17 +71,16 @@ function Manager() {
       flipped={flipped}
       selectedCardIndex={selectedCardIndex}
       onSelect={!isReincarnating && hasReincarnated ? setSelectedCardIndex : () => {}} />
-      
-      <ReincarnateButton 
-      onClick={reincarnate} 
+
+      <ReincarnateButton
+      onClick={reincarnate}
       disabled={isReincarnating} />
 
       {selectedCardIndex !== null && (
-        <div className="card-description">
+        <div className="card-description-desktop">
           <p>{cards[selectedCardIndex].description}</p>
         </div>
       )}
-
     </>
   );
 }

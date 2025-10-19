@@ -1,8 +1,9 @@
-import { Card } from './Card';  
+import { Card } from './Card';
 
 type CardData = {
   frontImage: string;
   backImage: string;
+  description: string;
 }
 
 type DisplayedCardsProps = {
@@ -13,23 +14,29 @@ type DisplayedCardsProps = {
 }
 
 
-export function DisplayedCards({cards, flipped, selectedCardIndex, onSelect}: DisplayedCardsProps) {
-  
+export function DisplayedCards({ cards, flipped, selectedCardIndex, onSelect }: DisplayedCardsProps) {
+
   return (
-    <div className="cards-container">
-      {cards.map((card, i) => {
-        return (
-          <Card
-          key={i}
-          frontImage={card.frontImage}
-          backImage={card.backImage}
-          isFlipped={flipped[i]} 
-          isSelected={selectedCardIndex === i}
-          onClick={() => onSelect(i)}
-          />
-        );
-      })}
-      
-    </div>
+      <div className="cards-container">
+        {cards.map((card, i) => {
+          return (
+            <div key={i} className="card-wrapper">
+              <Card
+                frontImage={card.frontImage}
+                backImage={card.backImage}
+                isFlipped={flipped[i]}
+                isSelected={selectedCardIndex === i}
+                onClick={() => onSelect(i)}
+              />
+              {selectedCardIndex === i && (
+                <div className="card-description card-description-mobile">
+                  <p>{card.description}</p>
+                </div>
+              )}
+            </div>
+
+          );
+        })}
+      </div>
   );
 }

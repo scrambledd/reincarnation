@@ -11,7 +11,7 @@
 
 .intro-text {
   color: white;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
   font-family: "riFont";
   animation: growFade 5s ease forwards;
 }

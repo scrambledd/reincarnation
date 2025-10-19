@@ -1,11 +1,12 @@
 .card {
-  width: 300px;
-  height: 450px;
+  width: min(300px, 28vw);
+  height: min(450px, 42vw);
+  
   perspective: 1000px;
   border: 1px solid transparent;
   
   /*transition: filter 0.3s ease;*/
-  transition: border 0.3s ease;
+  transition: border 0.5s ease;
 }
 
 /*
@@ -18,8 +19,6 @@
   border: 1px solid #f0f6f0;
    /*transform: scale(1.05);*/
 }
-
-  
 
 .card-inner {
   position: relative;
@@ -52,6 +51,15 @@
 .card-back {
   transform: rotateY(180deg);
 }
+
+
+@media (max-width: 480px) {
+  .card {
+    width: 250px;
+    height: 375px;
+  }
+}
+  
 
 /*
 
