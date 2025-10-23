@@ -1,9 +1,7 @@
 import { useState, useRef } from "react"
 import { cards as cardData } from "./data/cards"
-import { ReincarnateButton } from "./ReincarnateButton"
-import { DisplayedCards } from "./DisplayedCards"
-
-// keep state in the lowest common ancestor of all components that need it
+import { ReincarnateButton } from "./components/ReincarnateButton"
+import { DisplayedCards } from "./components/DisplayedCards"
 
 function Manager() {
   const [cards, setCards] = useState(cardData.slice(0, 3));
@@ -12,7 +10,27 @@ function Manager() {
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [hasReincarnated, setHasReincarnated] = useState(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  
+
+  const getNewCards = () => {
+    const newCards = [];
+    const usedIndices = new Set();
+    const excludedCardNames = new Set();
+
+    while (newCards.length < 3) {
+      const randIndex = Math.floor(Math.random() * cardData.length);
+      const selectedCard = cardData[randIndex];
+      const cardName = selectedCard.frontImage.replace("/images", "").replace(".png", "");
+
+      if (!usedIndices.has(randIndex) && !excludedCardNames.has(cardName)) {
+        usedIndices.add(randIndex);
+        newCards.push(selectedCard);
+        excludedCardNames.add(selectedCard.oppositeCard);
+      }
+    }
+
+    return newCards;
+  }
+
   const scrollToCard = (index: number) => {
     // Only scroll on mobile
     if (window.innerWidth > 480) return;
@@ -25,76 +43,60 @@ function Manager() {
     }
   };
 
+  const flipCardsSequentially = async () => {
+    for (let i = 0; i < 3; i++) {
+      // Stop execution for 1.2 seconds
+      // setTimeout alone doesn't work because it's non-blocking
+      await new Promise((res) => setTimeout(res, 1200));
+      // Pass function (current state) to setFlipped to get the latest state
+      // React state updates are asynchronous, using 'prev' avoids race conditions
+      // Because of the await, react doesn't batch state updates here
+      setFlipped((prev) => {
+        // Create a copy of the previous state (react state is immutable)
+        const updated = [...prev];
+        updated[i] = true;
+        return updated;
+      });
+      scrollToCard(i);
+    }
+  }
+
   const reincarnate = async () => {
     if (isReincarnating) return;
 
     setHasReincarnated(true);
     setIsReincarnating(true);
     setSelectedCardIndex(null);
-
     setFlipped([false, false, false]);
-    // since react batches setFlipped and setCards, add a delay to force re-render
+
+    // Since react batches setFlipped and setCards, add a delay to force re-render
     // so that the cards flip back before changing them
     await new Promise((res) => setTimeout(res, 500));
 
-    const newCards = [];
-    const usedIndices = new Set();
-    const excludedCardNames = new Set();
-
-    while (newCards.length < 3) {
-      const randIndex = Math.floor(Math.random() * cardData.length);
-      const selectedCard = cardData[randIndex];
-      const cardName = selectedCard.frontImage.replace("/", "").replace(".png", "");
-
-      if (!usedIndices.has(randIndex) && !excludedCardNames.has(cardName)) {
-        usedIndices.add(randIndex);
-        newCards.push(selectedCard);
-        excludedCardNames.add(selectedCard.oppositeCard);
-      }
-
-}
-
+    const newCards = getNewCards();
     setCards(newCards);
 
-    for (let i = 0; i < 3; i++) {
-      // stop execution for 1 second
-      // promise resolves with undefined
-      // setTimeout alone doesn't work because it's non-blocking
-      await new Promise((res) => setTimeout(res, 1200));
-      // pass function (current state) to setFlipped to get the latest state
-      // react state updates are asynchronous, using 'prev' avoids race conditions
-      // because of the await, react does not batch the state updates here
-      // react re-renders between iterations
-      setFlipped((prev) => {
-        // create a copy of the previous state (react state is immutable)
-        const updated = [...prev];
-        updated[i] = true;
-        return updated;
-      });
-
-      scrollToCard(i);
-    }
-
+    await flipCardsSequentially();
     setIsReincarnating(false);
-
   };
 
   return (
     <>
       <DisplayedCards
-      cards={cards}
-      flipped={flipped}
-      selectedCardIndex={selectedCardIndex}
-      onSelect={!isReincarnating && hasReincarnated ? setSelectedCardIndex : () => {}}
-      cardRefs={cardRefs}
-      isReincarnating={isReincarnating} />
+        cards={cards}
+        flipped={flipped}
+        selectedCardIndex={selectedCardIndex}
+        onSelect={!isReincarnating && hasReincarnated ? setSelectedCardIndex : () => { }}
+        cardRefs={cardRefs}
+        isReincarnating={isReincarnating} />
 
       <ReincarnateButton
-      onClick={reincarnate}
-      disabled={isReincarnating} />
+        onClick={reincarnate}
+        disabled={isReincarnating} />
 
       {selectedCardIndex !== null && (
         <div className="card-description-desktop">
+          <h3>{cards[selectedCardIndex].type}</h3>
           <p>{cards[selectedCardIndex].description}</p>
         </div>
       )}

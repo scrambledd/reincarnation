@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import './IntroScreen.css'
 
-
-export function IntroScreen({onFinish}: {onFinish: () => void}) {
+export function IntroScreen({ onFinish }: { onFinish: () => void }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ export function IntroScreen({onFinish}: {onFinish: () => void}) {
     return () => clearTimeout(timer);
   }, [onFinish])
 
-  if (!visible) return null; 
+  if (!visible) return null;
 
   return (
     <div className="intro-screen">

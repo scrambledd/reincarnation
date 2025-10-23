@@ -5,6 +5,7 @@ type CardData = {
   frontImage: string;
   backImage: string;
   description: string;
+  type: string;
 }
 
 type DisplayedCardsProps = {
@@ -20,7 +21,7 @@ type DisplayedCardsProps = {
 export const DisplayedCards = forwardRef<HTMLDivElement, DisplayedCardsProps>(
   function DisplayedCards({ cards, flipped, selectedCardIndex, onSelect, cardRefs, isReincarnating }, ref) {
 
-  return (
+    return (
       <div className="cards-container" ref={ref}>
         {cards.map((card, i) => {
           return (
@@ -42,14 +43,14 @@ export const DisplayedCards = forwardRef<HTMLDivElement, DisplayedCardsProps>(
                 isReincarnating={isReincarnating}
               />
               {selectedCardIndex === i && (
-                <div className="card-description card-description-mobile">
+                <div className="card-description-mobile">
+                  <h3>{cards[selectedCardIndex].type}</h3>
                   <p>{card.description}</p>
                 </div>
               )}
             </div>
-
           );
         })}
       </div>
-  );
-});
+    );
+  });

@@ -6,23 +6,17 @@
 
 .reincarnate-button {
   cursor: pointer;
-  font-family: riFont, sans-serif;
-  /*
-  padding: clamp(15px, 1.85vw, 20px);
-  font-size: clamp(30px, 3.7vw, 40px);
-  */
-  padding: min(20px, 1.85vw);
-  font-size: min(40px, 3.7vw);
-
+  padding: 15px;
+  font-size: 30px;
   border: none;
   background-color: #f0f6f0;
-  color: black;
-  border-radius: clamp(3px, 0.28vw, 5px);
+  color: #000;
+  border-radius: 3px;
 }
 
 .reincarnate-button:disabled {
   background-color: #f0f6f0;
-  color: black;
+  color: #000;
   cursor: default;
 }
 
@@ -30,10 +24,9 @@
   opacity: 0.8;
 }
 
-@media (max-width: 480px) {
+@media (min-width: 769px) {
   .reincarnate-button {
-    padding: 15px;
-    font-size: 30px;
+    padding: 18px;
+    font-size: 40px;
   }
 }
-

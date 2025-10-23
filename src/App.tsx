@@ -1,23 +1,20 @@
 import { useState } from 'react'
-import './App.css'
 import Manager from './Manager'
-import { IntroScreen } from './IntroScreen'
-
+import { IntroScreen } from './components/IntroScreen'
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
-
 
   return (
     <>
       {showIntro ? (
         <IntroScreen onFinish={() => setShowIntro(false)} />
       ) : (
-      <Manager />
+        <Manager />
       )}
     </>
-    
-    );
+
+  );
 }
 
 export default App

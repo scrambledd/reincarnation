@@ -15,7 +15,7 @@ export function Card({ frontImage, backImage, isFlipped, isSelected, onClick, is
     <div className={`card ${isFlipped ? "flipped" : ""}
     ${isSelected ? "selected" : ""} 
     ${isReincarnating ? "reincarnating" : ""}`}
-    onClick={onClick}
+      onClick={onClick}
       style={{ cursor: isFlipped ? 'pointer' : 'default' }}
     >
       <div className="card-inner">
