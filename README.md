@@ -1,0 +1,1 @@
+Out of ten possible life states, only three will shape your rebirth. Which fate will the cards reveal?
