@@ -19,7 +19,7 @@ function Manager() {
     while (newCards.length < 3) {
       const randIndex = Math.floor(Math.random() * cardData.length);
       const selectedCard = cardData[randIndex];
-      const cardName = selectedCard.frontImage.replace("/images", "").replace(".png", "");
+      const cardName = selectedCard.frontImage.replace("images/", "").replace(".png", "");
 
       if (!usedIndices.has(randIndex) && !excludedCardNames.has(cardName)) {
         usedIndices.add(randIndex);
